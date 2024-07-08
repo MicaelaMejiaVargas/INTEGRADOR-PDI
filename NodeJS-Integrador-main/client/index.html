@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/styles.css">
+  <title>Listado de tareas</title>
+</head>
+<body>
+  <header class="py-3">
+    <h1>Listado de tareas</h1>
+    <hr />
+  </header>
+  <main class="container">
+
+    <section class="formulario">
+      <form action="http://localhost:3000/tasks" method="post" id="formulario">
+        <input type="text" placeholder="Nombre" name="name">
+        <input type="text" placeholder="Descripcion" name="description">
+        <input type="submit" value="Submit!!">
+      </form>
+    </section>
+
+    
+    <ul id="lista-tareas">
+      <!--Acá se muestran las tareas-->
+    </ul>
+  </main>
+
+  <script src="scripts/tareas.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+.formulario {
+  width: 600px;
+  height: 360px;
+  background-color: rgba(0, 0, 0, 0.481);
+}
+.formulario__input {
+  width: 100%;
+  background-color: black;
+}
+@media screen and (min-width: 1200px) {
+  .formulario__input {
+    width: 50%;
+    background-color: aqua;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */

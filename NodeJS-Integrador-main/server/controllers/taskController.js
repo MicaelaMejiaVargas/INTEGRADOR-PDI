@@ -55,13 +55,16 @@ const taskController = {
   createTask: async (req, res) => {
     try { 
       const {id, name, description, completed} = req.body
-      const tasks = await TaskModel.create();
 
-      if(!id){
-        return res.status(401).json({error: "ID inválido"});
+      if(!id || !name || !description){
+        return res.status(401).json({error: "ID, nombre o descripcion inválida"});
       }
 
-      res.json({message: "Creamos la tarea!"});
+      const tasks = await TaskModel.create({
+        id, name, description, completed
+      });
+      tasks.save();
+
       return res.status(200).json(tasks);
     } catch (error) {
       console.log(error);

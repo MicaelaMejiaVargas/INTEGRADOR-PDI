@@ -8,9 +8,10 @@ const db = require('../config/database');
  * @property {string} description - La descripción de la tarea.
  * @property {boolean} completed - Estado de la tarea.
  */
+
 const Task = db.define('Task', {
   id: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     required: true,
     primaryKey: true
   },

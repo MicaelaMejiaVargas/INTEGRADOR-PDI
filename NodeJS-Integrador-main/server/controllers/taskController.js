@@ -27,7 +27,7 @@ const taskController = {
    */
   getTaskById: async (req, res) => {
     try {
-      const {id} = req.params
+      const id = req.params
       const task = await TaskModel.findByPk(id);
       
       if (!task) {
@@ -78,6 +78,23 @@ const taskController = {
    * @returns {Error} 500 - Retorna un objeto con el mensaje de error
    */
   updateTask: async (req, res) => {
+    const taskId = req.params.id;
+    const taskData = req.body;
+
+  try {
+    // Encuentra la tarea por su ID y actualízala con los datos recibidos
+    const updatedTask = await TaskModel.findByIdAndUpdate(taskId, taskData, { new: true });
+
+    if (!updatedTask) {
+      return res.status(404).json({ error: 'Tarea no encontrada' });
+    }
+
+    // Si la tarea se actualiza correctamente, devuelve la tarea actualizada
+    res.status(200).json(updatedTask);
+  } catch (error) {
+    // Si hay un error en el servidor, devuelve un error 500
+    res.status(500).json({ error: 'Error al actualizar la tarea' });
+  }
     res.json({ message: "Update task" });
   }, 
 
@@ -88,6 +105,11 @@ const taskController = {
    * @returns {Error} 500 - Retorna un objeto con el mensaje de error 
    */
   completeTask: async (req, res) => {
+    const taskId = req.params.id;
+    const taskData = req.body;
+  try{
+      const       
+    }
     res.json({message: "Completar tarea"})
   },
   

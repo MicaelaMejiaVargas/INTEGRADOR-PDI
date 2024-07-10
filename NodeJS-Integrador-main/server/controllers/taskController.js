@@ -57,10 +57,11 @@ const taskController = {
       const {id, name, description, completed} = req.body
       const tasks = await TaskModel.create();
 
-      if(!){
-
+      if(!id){
+        return res.status(401).json({error: "ID inválido"});
       }
-      res.json({message: "Crear tarea!"});
+
+      res.json({message: "Creamos la tarea!"});
       return res.status(200).json(tasks);
     } catch (error) {
       console.log(error);

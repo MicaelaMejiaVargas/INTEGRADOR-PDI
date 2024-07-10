@@ -70,6 +70,7 @@ const taskController = {
       console.log(error);
       return res.status(500).json({ message: "Error creating task" });
     }
+    res.json({ message: "create task" });
   }, 
   
   /**
@@ -79,7 +80,7 @@ const taskController = {
    * @returns {TaskModel} 200 - Retorna un objeto con la tarea actualizada
    * @returns {Error} 500 - Retorna un objeto con el mensaje de error
    */
-  updateTask: (req, res) => {
+  updateTask: async (req, res) => {
     res.json({ message: "Update task" });
   }, 
 
@@ -89,7 +90,7 @@ const taskController = {
    * @returns {TaskModel} 200 - Retorna un objeto con la tarea actualizada
    * @returns {Error} 500 - Retorna un objeto con el mensaje de error 
    */
-  completeTask: (req, res) => {
+  completeTask: async (req, res) => {
     res.json({message: "Completar tarea"})
   },
   
@@ -99,7 +100,24 @@ const taskController = {
    * @returns {TaskModel} 200 - Retorna un objeto con la tarea eliminada
    * @returns {Error} 500 - Retorna un objeto con el mensaje de error
    */
-  deleteTask: (req, res) => {
+  deleteTask: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const searchTask = await TaskModel.findOne({where: {id}});
+  
+      if(!searchTask){
+        return res.status(404).json({ message: "Task not found"});
+      }
+  
+      const borrar = await searchTask.destroy();
+
+      return res.status(200).json({
+        message: `Task deleted successfully`,
+        data: borrar
+      });
+    } catch (error) {
+      return res.status(500).json({error: "Internal Server Error"})
+    }
     res.json({ message: "Delete task" });
   }
 }

@@ -27,18 +27,15 @@ const taskController = {
    */
   getTaskById: async (req, res) => {
     try {
-      // Busca la tarea por su ID en la base de datos usando el modelo Task
-      const task = await Task.findByPk(taskId);
+      const {id} = req.params
+      const task = await TaskModel.findByPk(id);
       
-      // Verifica si se encontró la tarea
       if (!task) {
         return res.status(404).json({ error: 'Tarea no encontrada' });
       }
-      
-      // Retorna la tarea encontrada como respuesta
+  
       res.status(200).json(task);
     } catch (error) {
-      // Si ocurre un error, retorna un error 500 con el mensaje
       console.error('Error al obtener la tarea por ID:', error);
       res.status(500).json({ error: 'Error al obtener la tarea por ID' });
     }
@@ -116,6 +113,7 @@ const taskController = {
         data: borrar
       });
     } catch (error) {
+      console.log(error);
       return res.status(500).json({error: "Internal Server Error"})
     }
     res.json({ message: "Delete task" });

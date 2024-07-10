@@ -9,6 +9,11 @@ const db = require('../config/database');
  * @property {boolean} completed - Estado de la tarea.
  */
 const Task = db.define('Task', {
+  id: {
+    type: DataTypes.NUMBER,
+    required: true,
+    primaryKey: true
+  },
   name: {
     type: DataTypes.STRING,
     required: true,

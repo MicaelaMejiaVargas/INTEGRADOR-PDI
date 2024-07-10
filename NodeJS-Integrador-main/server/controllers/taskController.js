@@ -1,4 +1,5 @@
 const TaskModel = require("../models/Task.js");
+const { param } = require("../routes/taskRoutes.js");
 
 const taskController = {
   /**
@@ -8,7 +9,7 @@ const taskController = {
    * @returns {Error} 500 - Retorna un objeto con el mensaje de error
    */
   getAllTasks: async (req, res) => {
-    try {
+    try { 
       const tasks = await TaskModel.findAll();
 
       return res.status(200).json(tasks);
@@ -24,9 +25,25 @@ const taskController = {
    * @returns {TaskModel} 200 - Retorna un objeto con la tarea
    * @returns {Error} 500 - Retorna un objeto con el mensaje de error
    */
-  getTaskByName: (req, res) => {
+  getTaskById: async (req, res) => {
+    try {
+      // Busca la tarea por su ID en la base de datos usando el modelo Task
+      const task = await Task.findByPk(taskId);
+      
+      // Verifica si se encontró la tarea
+      if (!task) {
+        return res.status(404).json({ error: 'Tarea no encontrada' });
+      }
+      
+      // Retorna la tarea encontrada como respuesta
+      res.status(200).json(task);
+    } catch (error) {
+      // Si ocurre un error, retorna un error 500 con el mensaje
+      console.error('Error al obtener la tarea por ID:', error);
+      res.status(500).json({ error: 'Error al obtener la tarea por ID' });
+    }
     res.json({ message: "Get task by id" });
-  }, 
+  },
   
   /**
    * Crea una nueva tarea
@@ -36,7 +53,19 @@ const taskController = {
    * @returns {Error} 500 - Retorna un objeto con el mensaje de error
    */
   createTask: async (req, res) => {
-    res.json({message: "Crear tarea!"})
+    try { 
+      const {id, name, description, completed} = req.body
+      const tasks = await TaskModel.create();
+
+      if(!){
+
+      }
+      res.json({message: "Crear tarea!"});
+      return res.status(200).json(tasks);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Error creating task" });
+    }
   }, 
   
   /**

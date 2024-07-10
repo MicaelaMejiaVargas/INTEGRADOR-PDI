@@ -27,7 +27,7 @@ const taskController = {
    */
   getTaskById: async (req, res) => {
     try {
-      const id = req.params
+      const id = req.params.id;
       const task = await TaskModel.findByPk(id);
       
       if (!task) {
@@ -39,7 +39,6 @@ const taskController = {
       console.error('Error al obtener la tarea por ID:', error);
       res.status(500).json({ error: 'Error al obtener la tarea por ID' });
     }
-    res.json({ message: "Get task by id" });
   },
   
   /**
@@ -67,7 +66,6 @@ const taskController = {
       console.log(error);
       return res.status(500).json({ message: "Error creating task" });
     }
-    res.json({ message: "create task" });
   }, 
   
   /**
@@ -95,7 +93,6 @@ const taskController = {
     // Si hay un error en el servidor, devuelve un error 500
     res.status(500).json({ error: 'Error al actualizar la tarea' });
   }
-    res.json({ message: "Update task" });
   }, 
 
   /**
@@ -149,7 +146,6 @@ const taskController = {
       console.log(error);
       return res.status(500).json({error: "Internal Server Error"})
     }
-    res.json({ message: "Delete task" });
   }
 }
 

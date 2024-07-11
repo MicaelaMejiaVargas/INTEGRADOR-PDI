@@ -18,13 +18,14 @@
     <br>
     <section class="contiene-form">
       <form action="http://localhost:3000/tasks" method="post" id="formulario">
+        <input type="number" placeholder="ID" name="id">
         <input type="text" placeholder="Nombre" name="name">
         <input type="text" placeholder="Descripcion" name="description">
+        <input type="text" placeholder="completed" name="completed">
         <input class="btn" type="submit" value="Enviar">
       </form>
     </section>
 
-    
     <ul id="lista-tareas">
       <!--Acá se muestran las tareas-->
     </ul>

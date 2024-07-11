@@ -52,7 +52,7 @@ const taskController = {
     try { 
       const {id, name, description, completed} = req.body
 
-      if(!id || !name || !description){
+      if(!id || !name || !description || !completed){
         return res.status(401).json({error: "ID, nombre o descripcion inválida"});
       }
 

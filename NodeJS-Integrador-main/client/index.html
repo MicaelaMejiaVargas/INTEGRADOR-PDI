@@ -7,17 +7,20 @@
   <title>Listado de tareas</title>
 </head>
 <body>
-  <header class="py-3">
-    <h1>Listado de tareas</h1>
+      <!--==================== Cabezera ====================-->
+  <header>
+    <h1>Listado de tareas</h1> <br>
+    <p class="sub-title"> Formulario para crear nuevas tareas.</p><br>
     <hr />
   </header>
+      <!--==================== Formulario ====================-->
   <main class="container">
 
-    <section class="formulario">
+    <section class="contiene-form">
       <form action="http://localhost:3000/tasks" method="post" id="formulario">
         <input type="text" placeholder="Nombre" name="name">
         <input type="text" placeholder="Descripcion" name="description">
-        <input type="submit" value="Submit!!">
+        <input class="btn" type="submit" value="Enviar">
       </form>
     </section>
 
@@ -25,7 +28,12 @@
     <ul id="lista-tareas">
       <!--Acá se muestran las tareas-->
     </ul>
+
   </main>
+
+  <footer> 
+    <p>&copy; 2024 Registro de Alumnos. Todos los derechos reservados a <u>sole</u>.</p>
+  </footer>
 
   <script src="scripts/tareas.js"></script>
 </body>

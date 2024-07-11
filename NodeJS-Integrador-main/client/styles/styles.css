@@ -76,4 +76,12 @@ form input {
   box-sizing: border-box;
 }
 
+.tareas-creadas {
+  justify-content: center;
+}
+.tareas-creadas h2 {
+  text-align: center;
+  color: rgb(30, 23, 119);
+}
+
 /*# sourceMappingURL=styles.css.map */

@@ -14,28 +14,52 @@ const obtenerTareas = async () => {
 /**
  * Completa la lista <ul> con las tareas obtenidas
  */
-const renderizarTareas = async () => {
-  try {
-    const response = await fetch('./server/index');
-    const data = await response.json();
 
-    // Array de objetos que representan las tareas
-    const tareas = data.tareas;
-    const listaTareas = document.getElementById('lista-tareas'); 
+  const renderizarTareas = async () => {
+//     obtenerTareas();
+//     try {
+//       const response = await fetch('./server/index');
+//       const data = await response.json();
+  
+//       // Array de objetos que representan las tareas
+//       const tareas = data.tareas;
+//       const listaTareas = document.getElementById('lista-tareas'); 
+  
+//       // Limpia cualquier contenido previo en la lista
+//       listaTareas.innerHTML = '';
+  
+//       // Itera sobre las tareas y crea elementos <li> para cada una
+//       tareas.forEach(tarea => {
+//         const li = document.createElement('li');
+//         li.textContent = `${tarea.id} : ${tarea.name} - ${tarea.description} (${tarea.completed ? 'true' : 'false'})`;
+//         listaTareas.appendChild(li);
+//       });
+  
+//     } catch (error) {
+//       console.error('Error al renderizar tareas:', error);
+//     }
+//   }  
 
-    // Limpia cualquier contenido previo en la lista
-    listaTareas.innerHTML = '';
+// }
 
-    // Itera sobre las tareas y crea elementos <li> para cada una
-    tareas.forEach(tarea => {
+// document.querySelector('.tareas-creadas').addEventListener('submit', handlerFormulario);
+
+function renderizarTareas() {
+  listaContactos.innerHTML = '';
+
+  contactos.forEach((contacto, index) => {
       const li = document.createElement('li');
-      li.textContent = `${tarea.id} : ${tarea.name} - ${tarea.description} (${tarea.completed ? 'true' : 'false'})`;
-      listaTareas.appendChild(li);
-    });
+      li.className = 'list-group-item';
 
-  } catch (error) {
-    console.error('Error al renderizar tareas:', error);
-  }
+      const contenido = `
+          <li>${contacto.nombre} ${contacto.apellido} ${contacto.telefono}</li>
+          <button class="btn btn-outline-danger btn-sm ms-2" onclick="toggleFavorito(${index})">
+              ${contacto.favorito ? 'Quitar de Favoritos' : 'Agregar a Favoritos'}
+          </button>
+      `;
+
+      li.innerHTML = contenido;
+      listaContactos.appendChild(li);
+  });
 }
-
 renderizarTareas();

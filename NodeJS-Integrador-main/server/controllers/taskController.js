@@ -76,23 +76,26 @@ const taskController = {
    * @returns {Error} 500 - Retorna un objeto con el mensaje de error
    */
   updateTask: async (req, res) => {
-    const taskId = req.params.id;
-    const taskData = req.body;
+    try {
+      const taskId = req.params.id;
+      const {id, name, description, completed} = req.body
 
-  try {
-    // Encuentra la tarea por su ID y actualízala con los datos recibidos
-    const updatedTask = await TaskModel.findByIdAndUpdate(taskId, taskData, { new: true });
+      // Encuentra la tarea por su ID
+      const updatedTask = await TaskModel.findOne({ where: { id: taskId }});
 
-    if (!updatedTask) {
-      return res.status(404).json({ error: 'Tarea no encontrada' });
+      if (!updatedTask) {
+        return res.status(404).json({ error: 'Tarea no encontrada' });
+      }
+
+      //Luego de encontrar el ID - Actualíza con los datos recibidos
+      const actualizaTask = await updatedTask.update({name, description, completed});
+      
+      // Si la tarea se actualiza correctamente, devuelve la tarea actualizada
+      res.status(200).json(actualizaTask);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: 'Error al actualizar la tarea' });
     }
-
-    // Si la tarea se actualiza correctamente, devuelve la tarea actualizada
-    res.status(200).json(updatedTask);
-  } catch (error) {
-    // Si hay un error en el servidor, devuelve un error 500
-    res.status(500).json({ error: 'Error al actualizar la tarea' });
-  }
   }, 
 
   /**
@@ -102,22 +105,24 @@ const taskController = {
    * @returns {Error} 500 - Retorna un objeto con el mensaje de error 
    */
   completeTask: async (req, res) => {
-    const taskId = req.query.id;
-    const completed = req.query.completed === 'true'; // Convierte el string 'true' o 'false' a booleano
-  
     try {
-      // Encuentra la tarea por su ID y actualiza el estado 'completed'
-      const updatedTask = await TaskModel.findByIdAndUpdate(taskId, { completed }, { new: true });
+      const taskId = req.query.id;
+      const completed = req.query.completed === 'true'; // Convierte el string 'true' o 'false' a booleano
+    
+      // Encuentra la tarea por su ID
+      const completarTask = await TaskModel.findOne({ where: { id: taskId}});
   
-      if (!updatedTask) {
+      if (!completarTask) {
         return res.status(404).json({ error: 'Tarea no encontrada' });
       }
   
-      // Si la tarea se actualiza correctamente, devuelve la tarea actualizada
-      res.status(200).json(updatedTask);
+      const comTask = await completarTask.update({completed});
+      
+      res.status(200).json(comTask);
     } catch (error) {
+      console.log(error);
       // Si hay un error en el servidor, devuelve un error 500
-      res.status(500).json({ error: 'Error al actualizar el estado de la tarea' });
+      res.status(500).json({ error: 'Error al completar la tarea' });
     }
   },
   

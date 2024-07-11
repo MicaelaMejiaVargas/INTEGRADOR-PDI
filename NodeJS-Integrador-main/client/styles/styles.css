@@ -45,6 +45,11 @@ footer {
   background-color: #45a049;
 }
 
+.contiene-form {
+  display: flex;
+  justify-content: center;
+}
+
 form {
   text-align: center;
   background-color: #fff;

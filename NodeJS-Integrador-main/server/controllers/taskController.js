@@ -52,9 +52,9 @@ const taskController = {
     try { 
       const {id, name, description, completed} = req.body
 
-      if(!id || !name || !description || !completed){
-        return res.status(401).json({error: "ID, nombre o descripcion inválida"});
-      }
+      // if(!id || !name || !description || !completed){
+      //   return res.status(401).json({error: "ID, nombre o descripcion inválida"});
+      // }
 
       const tasks = await TaskModel.create({
         id, name, description, completed

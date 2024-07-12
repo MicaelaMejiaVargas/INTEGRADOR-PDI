@@ -21,7 +21,7 @@
         <input type="number" placeholder="ID" name="id">
         <input type="text" placeholder="Nombre" name="name">
         <input type="text" placeholder="Descripcion" name="description">
-        <input type="text" placeholder="completed" name="completed">
+        <input type="text" placeholder="Completed" name="completed">
         <input class="btn" type="submit" value="Enviar">
       </form>
     </section>
@@ -34,13 +34,13 @@
         <!--Acá se muestran las tareas-->
       </ul>
 
-      <input class="mostrar-tareas" type="submit" value="Mostrar">
+      <button class="mostrar-tareas" type="submit" value="Mostrar" onclick="renderizarTareas()"> Mostrar </button>
     </section>
-
+    <br>
   </main>
-
+  <!--==================== Pie ====================-->
   <footer> 
-    <p>&copy; 2024 Tarea P.D.I. Todos los derechos reservados a <u>sole</u>.</p>
+    <p class="texto-footer">&copy; 2024 Tarea P.D.I. Todos los derechos reservados a <u>sole</u>.</p>
   </footer>
 
   <script src="scripts/tareas.js"></script>

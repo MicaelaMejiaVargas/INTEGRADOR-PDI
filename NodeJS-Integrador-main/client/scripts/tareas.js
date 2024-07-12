@@ -17,22 +17,18 @@ const obtenerTareas = async () => {
 const renderizarTareas = async () => {
   try {
     const respuesta = await obtenerTareas();
-    const ulMostrar = document.getElementById('lista-tareas');
-    ulMostrar.innerHTML = '';
-
-    const ul = document.createElement('ul');
+    const ul = document.getElementById('lista-tareas');
+    ul.innerHTML = '';
 
     respuesta.forEach(tarea => {
       const li = document.createElement('li');
-      li.textContent = `${tarea.id}: ${tarea.name} - ${tarea.description} (${tarea.completed ? 'true' : 'false'})`;
+      li.textContent = `${tarea.id} ${tarea.name} - ${tarea.description} (${tarea.completed ? 'completada' : 'incompleta'})`;
       ul.appendChild(li); 
     });
-
-    ulMostrar.appendChild(ul);
 
   } catch (error) {
     console.error('Error al renderizar tareas:', error);
   }
 }
 
-renderizarTareas();
+document.querySelector(".mostrar-tareas").addEventListener("click",renderizarTareas);

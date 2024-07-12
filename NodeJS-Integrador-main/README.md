@@ -1,6 +1,6 @@
 # Trabajo integrador
 
-**INTEGRANTES: MEJIA VARGAS MICAELA Y MEJIA SILE SOL**
+**INTEGRANTES: MEJIA SILE SOL  Y MEJIA VARGAS MICAELA**
 
 1. Copiar/clonar el repositorio
 2. Poner el nombre de los integrantes en el archivo README.md

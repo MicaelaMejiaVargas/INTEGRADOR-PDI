@@ -56,6 +56,8 @@ const taskController = {
       //   return res.status(401).json({error: "ID, nombre o descripcion inválida"});
       // }
 
+      console.log(req.body);
+
       const tasks = await TaskModel.create({
         id, name, description, completed
       });

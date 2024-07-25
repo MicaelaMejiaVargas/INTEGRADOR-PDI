@@ -14,21 +14,65 @@ const obtenerTareas = async () => {
 /**
  * Completa la lista <ul> con las tareas obtenidas
  */
+const btnMostrar=document.querySelector(".mostrar-tareas");
+
 const renderizarTareas = async () => {
   try {
-    const respuesta = await obtenerTareas();
+    let contenido=btnMostrar.textContent;
+    console.log(contenido);
+    btnMostrar.textContent="Ocultar";
+
+    const tareas = await obtenerTareas();
     const ul = document.getElementById('lista-tareas');
     ul.innerHTML = '';
 
-    respuesta.forEach(tarea => {
+    tareas.forEach((tarea, i) => {
       const li = document.createElement('li');
-      li.textContent = `${tarea.id} ${tarea.name} - ${tarea.description} (${tarea.completed ? 'completada' : 'incompleta'})`;
-      ul.appendChild(li); 
+      const botonTexto = tarea.completed ? 'Completada' : 'Incompleta';
+      const botonClase = tarea.completed ? 'btn-tareas-completed' : 'btn-tareas-incomplete';
+
+      li.innerHTML = `${tarea.id} ${tarea.name} - ${tarea.description} <button class="${botonClase}" onclick="completar(${i})">${botonTexto}</button>`;
+
+      ul.appendChild(li);
     });
 
   } catch (error) {
     console.error('Error al renderizar tareas:', error);
   }
-}
+};
 
-document.querySelector(".mostrar-tareas").addEventListener("click",renderizarTareas);
+/**
+ * Marca una tarea como completada o incompleta
+ */
+const completar = async (i) => {
+  try {
+    const tareas = await obtenerTareas();
+    const tarea = tareas[i];
+    const nuevoEstado = !tarea.completed;
+
+    const datos = {
+      completed: nuevoEstado
+    };
+
+    const resp = await fetch(`http://localhost:3000/tasks/${tarea.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(datos),
+    });
+
+    if (!resp.ok) {
+      console.log('Error al completar la tarea');
+    }
+    
+    tarea.completed = nuevoEstado;
+
+    renderizarTareas();
+
+  } catch (error) {
+    console.error('Error al completar la tarea:', error);
+  }
+};
+
+btnMostrar.addEventListener("click", renderizarTareas);

@@ -11,3 +11,14 @@
   margin: 5px; 
 }
 .btn:hover {background-color: #45a049;}
+
+
+.btn-tareas-completed {
+  background-color: green;
+  color: white;
+}
+
+.btn-tareas-incomplete {
+  background-color: red;
+  color: white;
+}

@@ -123,7 +123,6 @@ const taskController = {
       res.status(200).json(comTask);
     } catch (error) {
       console.log(error);
-      // Si hay un error en el servidor, devuelve un error 500
       res.status(500).json({ error: 'Error al completar la tarea' });
     }
   },
